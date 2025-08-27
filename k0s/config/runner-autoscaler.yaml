@@ -1,0 +1,14 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: my-ephemeral-runners-autoscaler
+  namespace: actions-runner-system
+spec:
+  scaleTargetRef:
+    name: my-ephemeral-runners
+  minReplicas: 0
+  maxReplicas: 5
+  metrics:
+    - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+      repositoryNames:
+        - BryamSK/action-runner-local # Cambia por tu repo

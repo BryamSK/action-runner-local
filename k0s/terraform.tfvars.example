@@ -1,0 +1,13 @@
+proxmox_api_url     = "https://yourproxmoxserver:8006/api2/json"
+proxmox_username    = "user@pve"
+proxmox_token_id    = "user@pve!user-token"
+proxmox_token       = "token"
+node                = "node1"
+nodes               = ["node1", "node2"]
+storage_pool        = "local-lvm"
+vm_user             = "user"
+vm_private_key_path = "/home/user/.ssh/id_rsa"
+ips_master          = ["192.168.100.2", "192.168.100.3", "192.168.100.4"]
+ips_nodes           = ["192.168.100.176", "192.168.100.177", "192.168.100.178"]
+gw                  = "192.168.100.1"
+gitrepo             = "repo"
