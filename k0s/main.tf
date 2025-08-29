@@ -4,19 +4,19 @@ resource "proxmox_vm_qemu" "k0s_single" {
   count           = 1
   name            = "runners-${var.gitrepo}-${count.index + 1}"
   target_nodes    = var.nodes
-  clone           = "k0s"
+  clone           = var.templete
   full_clone      = true
   bootdisk        = "scsi0"
   scsihw          = "virtio-scsi-pci"
   ssh_user        = var.vm_user
   ssh_private_key = file(var.vm_private_key_path)
-  memory          = 4096
+  memory          = var.ram
   agent           = 1
   os_type         = "cloud-init"
   ipconfig0       = "gw=${var.gw},ip=${element(var.ips_nodes, count.index)}/24"
 
   cpu {
-    cores = 2
+    cores = var.core
   }
   disk {
     slot    = "scsi0"
@@ -107,7 +107,8 @@ resource "proxmox_vm_qemu" "k0s_single" {
       "sleep 20",
       "helm upgrade --kubeconfig ./kubeconfig --install arc actions-runner-controller/actions-runner-controller --namespace actions-runner-system --create-namespace",
       "sleep 20",      
-      "k0s kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_app_id=1848327 --from-literal=github_app_installation_id=82923522 --from-file=github_app_private_key=private-key.pem",
+      #"k0s kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_app_id=${var.github_app_id} --from-literal=github_app_installation_id=${var.github_app_installation_id} --from-file=github_app_private_key=private-key.pem",
+      "k0s kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_app_id=${var.github_app_id} --from-literal=github_app_installation_id=${var.github_app_installation_id} --from-literal=github_token=${var.git_token} --from-file=github_app_private_key=private-key.pem",
       "sleep 20",
       "k0s kubectl apply -f runner-autoscaler.yaml",
       "sleep 20",

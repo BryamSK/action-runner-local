@@ -54,3 +54,27 @@ variable "gitrepo" {
   description = "Git repository for the action runners"
   type        = string
 }
+variable "github_app_installation_id" {
+  description = "Git repository for the action runners"
+  type        = string
+}
+variable "github_app_id" {
+  description = "Git repository for the action runners"
+  type        = string
+}
+variable "git_token" {
+  description = "Git personal Token"
+  type        = string
+}
+variable "ram" {
+  description = "RAM"
+  type = string  
+}
+variable "core" {
+  description = "CPU CORE"
+  type = string  
+}
+variable "templete" {
+  description = "Template name"
+  type        = string
+}

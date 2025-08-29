@@ -11,4 +11,4 @@ spec:
   metrics:
     - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
       repositoryNames:
-        - BryamSK/action-runner-local # Cambia por tu repo
+        - BryamSK/action-runner-local
