@@ -4,8 +4,12 @@ name: CI/CD
 on:
   #manual
   #workflow_dispatch:
+
+  #On push
    push:
      branches: [ "main" ]
+  
+  #On pull_request
   # pull_request:
   #   branches: [ "main" ]
 
@@ -24,7 +28,37 @@ jobs:
         with:
           terraform_version: 1.8.5
       - name: Terraform Init, Validate & Plan
+        env:
+          PROXMOX_API_URL: ${{ secrets.PROXMOX_API_URL }}
+          PROXMOX_USERNAME: ${{ secrets.PROXMOX_USERNAME }}
+          PROXMOX_TOKEN_ID: ${{ secrets.PROXMOX_TOKEN_ID }}
+          PROXMOX_TOKEN: ${{ secrets.PROXMOX_TOKEN }}
+          G_TOKEN: ${{ secrets.G_TOKEN }}
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_INSTALLATION_ID: ${{ secrets.APP_INSTALLATION_ID }}
         run: |
+          cat > terraform.tfvars <<EOF
+          proxmox_api_url     = "${PROXMOX_API_URL}"
+          proxmox_username    = "${PROXMOX_USERNAME}"
+          proxmox_token_id    = "${PROXMOX_TOKEN_ID}"
+          proxmox_token       = "${PROXMOX_TOKEN}"
+          node                = "node1"
+          nodes               = ["node1", "pxmaster"]
+          storage_pool        = "local-lvm"
+          vm_user             = "root"
+          vm_private_key_path = "/root/.ssh/id_rsa"
+          templete            = "k0s"
+          ram                 = 4096
+          core                = 2
+          ips_master          = ["192.168.99.165", "192.168.99.166", "192.168.99.167"]
+          ips_nodes           = ["192.168.99.176", "192.168.99.177", "192.168.99.178"]
+          gw                  = "192.168.99.1"
+          gitrepo             = "action-runner-local"
+          github_app_id       = "${APP_ID}"
+          github_app_installation_id = "${APP_INSTALLATION_ID}"
+          git_token           = "${G_TOKEN}"
+          EOF
+
           terraform init -upgrade
           terraform validate
           terraform plan
