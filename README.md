@@ -12,7 +12,7 @@ Este proyecto despliega un clúster k0s en Proxmox utilizando Terraform. El obje
 
 ## Requisitos
 
-- Proxmox con un template Debian.
+- Proxmox con un template Debian y K0s Instalado ([templete de Debian12 Base, Docker y K0s para Proxmox](https://github.com/BryamSK/infra-proxmox)).
 - Terraform.
 - Conexión SSH configurada para acceder a la VM.
 - Acceso a GitHub con permiso para crear un GitHub App y generar el token/clave privada (.pem).
