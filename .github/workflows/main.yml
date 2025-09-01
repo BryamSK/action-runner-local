@@ -23,6 +23,10 @@ jobs:
         working-directory: ./k0s
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
