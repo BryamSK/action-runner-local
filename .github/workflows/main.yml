@@ -38,26 +38,25 @@ jobs:
           APP_INSTALLATION_ID: ${{ secrets.APP_INSTALLATION_ID }}
         run: |
           cat > terraform.tfvars <<EOF
-          proxmox_api_url     = "${PROXMOX_API_URL}"
-          proxmox_username    = "${PROXMOX_USERNAME}"
-          proxmox_token_id    = "${PROXMOX_TOKEN_ID}"
-          proxmox_token       = "${PROXMOX_TOKEN}"
-          node                = "node1"
-          nodes               = ["node1", "pxmaster"]
-          storage_pool        = "local-lvm"
-          vm_user             = "root"
-          vm_private_key_path = "/root/.ssh/id_rsa"
-          templete            = "k0s"
-          ram                 = 4096
-          core                = 2
-          ips_master          = ["192.168.99.165", "192.168.99.166", "192.168.99.167"]
-          ips_nodes           = ["192.168.99.176", "192.168.99.177", "192.168.99.178"]
-          gw                  = "192.168.99.1"
-          gitrepo             = "action-runner-local"
-          github_app_id       = "${APP_ID}"
-          github_app_installation_id = "${APP_INSTALLATION_ID}"
-          git_token           = "${G_TOKEN}"
-          EOF
+          echo "proxmox_api_url     = "${PROXMOX_API_URL}"" > terraform.tfvars
+          echo "proxmox_username    = "${PROXMOX_USERNAME}"" >> terraform.tfvars
+          echo "proxmox_token_id    = "${PROXMOX_TOKEN_ID}"" >> terraform.tfvars
+          echo "proxmox_token       = "${PROXMOX_TOKEN}"" >> terraform.tfvars
+          echo "node                = "node1"" >> terraform.tfvars
+          echo "nodes               = ["node1", "pxmaster"]" >> terraform.tfvars
+          echo "storage_pool        = "local-lvm"" >> terraform.tfvars
+          echo "vm_user             = "root"" >> terraform.tfvars
+          echo "vm_private_key_path = "/root/.ssh/id_rsa"" >> terraform.tfvars
+          echo "templete            = "k0s"" >> terraform.tfvars
+          echo "ram                 = 4096" >> terraform.tfvars
+          echo "core                = 2" >> terraform.tfvars
+          echo "ips_master          = ["192.168.99.165", "192.168.99.166", "192.168.99.167"]" >> terraform.tfvars
+          echo "ips_nodes           = ["192.168.99.176", "192.168.99.177", "192.168.99.178"]" >> terraform.tfvars
+          echo "gw                  = "192.168.99.1"" >> terraform.tfvars
+          echo "gitrepo             = "action-runner-local"" >> terraform.tfvars
+          echo "github_app_id       = "${APP_ID}"" >> terraform.tfvars
+          echo "github_app_installation_id = "${APP_INSTALLATION_ID}"" >> terraform.tfvars
+          echo "git_token           = "${G_TOKEN}"" >> terraform.tfvars
 
           terraform init -upgrade
           terraform validate
