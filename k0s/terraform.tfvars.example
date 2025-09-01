@@ -9,6 +9,7 @@ vm_user             = "user"
 vm_private_key_path = "/home/user/.ssh/id_rsa"
 templete            = "your_k0s_templete"
 ram                 = 4096
+core                = 2
 ips_master          = ["192.168.100.2", "192.168.100.3", "192.168.100.4"]
 ips_nodes           = ["192.168.100.176", "192.168.100.177", "192.168.100.178"]
 gw                  = "192.168.100.1"
